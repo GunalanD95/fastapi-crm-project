@@ -17,3 +17,8 @@ get_db = db.get_db # importing the db connection
 @router.post('/create_user') # we are using response model to limit the respone body which we want to show using schema class
 def create_user(request: schemas.User,db : Session = Depends(get_db)):
     return user.create_user(request,db)
+
+
+@router.get('/getuser/{id}')
+def get_user(id:int,response: Response,db : Session = Depends(get_db)):
+    return user.get_user(id,response,db)
