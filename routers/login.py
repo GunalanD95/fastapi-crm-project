@@ -18,6 +18,6 @@ TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
             
 @router.get("/", response_class=HTMLResponse)
 async def login(request: Request):
-    return TEMPLATES.TemplateResponse("index.html",{"request": request})
+    return TEMPLATES.TemplateResponse("login.html",{"request": request})
 
 
