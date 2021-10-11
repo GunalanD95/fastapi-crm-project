@@ -25,8 +25,17 @@ async def login(request: Request):
 
 
 @router.post("/")
-async def ps_login(request: Request):
+async def ps_login(request: Request,db: Session = Depends(get_db)):
     form_data = await request.form()
     da = jsonable_encoder(form_data)
     print(form_data,"dfnkfn")
-    return da
+    print(form_data['email'],"gotitt")
+    email = form_data['email']
+    pwd = form_data['password']
+    lead = db.query(models.User).filter(models.User.email== email).first()
+    password = db.query(models.User).filter(models.User.password== pwd).first()
+    if lead: 
+        if password:     
+            return "Login Success"
+    else:
+        return "invalid user"
