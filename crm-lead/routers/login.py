@@ -33,8 +33,8 @@ async def ps_login(request: Request,db: Session = Depends(get_db)):
     email = form_data['email']
     pwd = form_data['password']
     lead = db.query(models.User).filter(models.User.email== email).first()
-    password = db.query(models.User).filter(models.User.password== pwd).first()
-    if lead: 
+    if lead:
+        password = db.query(models.User).filter(lead.password== pwd).first() 
         if password:     
             return "Login Success"
     else:
